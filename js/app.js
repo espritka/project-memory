@@ -49,19 +49,14 @@ function displayCardSymbol () {
       // console.log("Card was just clicked!");   - test if card is clicked
       const cardOpen = event.target.classList.toggle('open');
       const cardShow = event.target.classList.toggle('show');
-      addToOpenCards();
+      addToOpenCards(event.target);
     })
   }
 }
 
-function addToOpenCards() {
-  for (let i = 0; i < listOfcards.length; i++) {
-    listOfcards[i].addEventListener('click', function (event) {
-      const card = event.target;
-      openCards.push();
-      console.log(openCards);
-    })
-  }
+function addToOpenCards(card) {
+  openCards.push(card)
+  console.log(openCards);   // - test if card is added with a click to this array
 }
 
 

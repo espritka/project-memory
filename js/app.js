@@ -39,11 +39,14 @@ function shuffle(array) {
 
  const listOfcards = document.querySelectorAll('.card');
  // console.log(listOfcards);   - test if correct list is created
- for (let i = 0; i < listOfcards.length; i++) {
-   listOfcards[i].addEventListener('click', function (event) {
-     // console.log("Card was just clicked!");   - test if card is clicked
-     const cardOpen = event.target.classList.toggle('open');
-     const cardShow = event.target.classList.toggle('show');
-
-   });
+ function displayCardSymbol () {
+   for (let i = 0; i < listOfcards.length; i++) {
+     listOfcards[i].addEventListener('click', function (event) {
+       // console.log("Card was just clicked!");   - test if card is clicked
+       const cardOpen = event.target.classList.toggle('open');
+       const cardShow = event.target.classList.toggle('show');
+     });
+   }
  }
+
+ displayCardSymbol();

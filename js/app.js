@@ -42,8 +42,8 @@ function shuffle(array) {
  for (let i = 0; i < listOfcards.length; i++) {
    listOfcards[i].addEventListener('click', function (event) {
      // console.log("Card was just clicked!");   - test if card is clicked
-     const cardOpen = event.classList.toggle('open');
-     const cardShow = event.classList.toggle('show');
+     const cardOpen = event.target.classList.toggle('open');
+     const cardShow = event.target.classList.toggle('show');
 
    });
  }

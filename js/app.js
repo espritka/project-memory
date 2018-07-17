@@ -38,9 +38,12 @@ function shuffle(array) {
  */
 
  const listOfcards = document.querySelectorAll('.card');
- console.log(listOfcards);
+ // console.log(listOfcards);   - test if correct list is created
  for (let i = 0; i < listOfcards.length; i++) {
-   listOfcards[i].addEventListener('click', function () {
-     console.log("Card was just clicked!");
+   listOfcards[i].addEventListener('click', function (event) {
+     // console.log("Card was just clicked!");   - test if card is clicked
+     const cardOpen = event.classList.toggle('open');
+     const cardShow = event.classList.toggle('show');
+
    });
  }

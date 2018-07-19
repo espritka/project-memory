@@ -74,6 +74,7 @@ function checkOpenCardsForDuplicate() {
     if (card1.firstElementChild.className  === card2.firstElementChild.className) {
       console.log("cards are equal");
       // add to array matchedCards
+      openCards = [];
     }
     else {
       console.log("cards are NOT equal");
@@ -82,6 +83,7 @@ function checkOpenCardsForDuplicate() {
         card1.classList.remove('show');
         card2.classList.remove('open');
         card2.classList.remove('show');
+        openCards = [];
       }, 1050);
     }
   }

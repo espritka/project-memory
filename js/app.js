@@ -75,15 +75,15 @@ function checkOpenCardsForDuplicate() {
       console.log("cards are equal");
       // add to array matchedCards
     }
-    // else {
-    //   console.log("cards are NOT equal");
-    //   setTimeout (function removeOpenShow() {
-    //     card1.classList.remove('open');
-    //     card1.classList.remove('show');
-    //     card2.classList.remove('open');
-    //     card2.classList.remove('show');
-    //   }, 1050);
-    // }
+    else {
+      console.log("cards are NOT equal");
+      setTimeout (function removeOpenShow() {
+        card1.classList.remove('open');
+        card1.classList.remove('show');
+        card2.classList.remove('open');
+        card2.classList.remove('show');
+      }, 1050);
+    }
   }
   // else {
   //   // cards are NOT equal

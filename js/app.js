@@ -56,8 +56,44 @@ function displayCardSymbol () {
 
 function addToOpenCards(card) {
   openCards.push(card)
-  console.log(openCards);   // - test if card is added with a click to this array
+  // console.log(openCards);   // - test if card is added with a click to this array
+  checkOpenCardsForDuplicate(card);
 }
+
+function checkOpenCardsForDuplicate() {
+  if (openCards.length < 2) {
+    // wait for another card, do nothing
+    console.log(openCards)
+  }
+  else if (openCards.length === 2) {
+    console.log("Two cards!")
+    console.log(openCards)
+    //check if card1 and card2 are equal
+    let card1 = openCards[0];
+    let card2 = openCards[1];
+    if (card1.firstElementChild.className  === card2.firstElementChild.className) {
+      console.log("cards are equal");
+      // add to array matchedCards
+    }
+    // else {
+    //   console.log("cards are NOT equal");
+    //   setTimeout (function removeOpenShow() {
+    //     card1.classList.remove('open');
+    //     card1.classList.remove('show');
+    //     card2.classList.remove('open');
+    //     card2.classList.remove('show');
+    //   }, 1050);
+    // }
+  }
+  // else {
+  //   // cards are NOT equal
+  //   //stop adding cards / reset to black side
+  //   card.classList.toggle('open');
+  //   card.classList.toggle('show');
+  //   console.log("openCards");
+  // }
+}
+
 
 
 displayCardSymbol();

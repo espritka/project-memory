@@ -44,6 +44,10 @@ let openCards = [];
 let matchedCards = [];
 let moves = document.querySelector('.moves');
 let movesCount = 0;
+const starOne = document.getElementById('one');
+const starTwo = document.getElementById('two');
+const starThree = document.getElementById('three');
+
 
 function displayCardSymbol () {
   for (let i = 0; i < listOfcards.length; i++) {
@@ -52,7 +56,6 @@ function displayCardSymbol () {
       const cardOpen = event.target.classList.toggle('open');
       const cardShow = event.target.classList.toggle('show');
       addToOpenCards(event.target);
-      allCardsUncovered();
     })
   }
 }
@@ -103,14 +106,16 @@ function checkOpenCardsForDuplicate() {
       }, 1050);
     }
   }
+  allCardsUncovered();
+  stars();
 }
 
 function allCardsUncovered() {
   console.log("in matched cards there are: " + matchedCards.length + " cards");   // - test how many cards are added to the array
   if (matchedCards.length === 16) {
     // say that you won the Game
-    setTimeout(function winwin() {
-      window.alert("You won! The game is over. You only needed " + movesCount + " moves to do it.");
+    setTimeout(function youWin() {
+      window.alert("You win! The game is over. You only needed " + movesCount + " moves to do it.");
       // say how many moves were used to win
     }, 0);
   }
@@ -122,6 +127,26 @@ function howManyMoves() {
   movesCount = movesCount + 1;
   moves.innerHTML = movesCount;
   console.log(moves);
+}
+
+// ************** displaying stars ***************
+
+function stars() {
+  if (movesCount <= 12) {
+    // display 3 stars
+  } else if (movesCount > 12 && movesCount <= 20) {
+    // display 2 stars
+    starOne.style.display = 'none';
+  } else if (movesCount > 20 && movesCount <= 30) {
+    // display 1 stars
+    starOne.style.display = 'none';
+    starTwo.style.display = 'none';
+  } else {
+    // no stars
+    starOne.style.display = 'none';
+    starTwo.style.display = 'none';
+    starThree.style.display = 'none';
+  }
 }
 
 

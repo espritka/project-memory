@@ -50,6 +50,7 @@ function displayCardSymbol () {
       const cardOpen = event.target.classList.toggle('open');
       const cardShow = event.target.classList.toggle('show');
       addToOpenCards(event.target);
+      allCardsUncovered();
     })
   }
 }
@@ -58,6 +59,13 @@ function addToOpenCards(card) {
   openCards.push(card)
   // console.log(openCards);   // - test if card is added with a click to this array
   checkOpenCardsForDuplicate(card);
+}
+
+function addToMatchedCards(card) {
+  matchedCards.push(card);
+  card.classList.remove('open');
+  card.classList.remove('show');
+  card.classList.add('match');
 }
 
 function checkOpenCardsForDuplicate() {
@@ -74,6 +82,10 @@ function checkOpenCardsForDuplicate() {
     if (card1.firstElementChild.className  === card2.firstElementChild.className) {
       console.log("cards are equal");
       // add to array matchedCards
+      addToMatchedCards(card1);
+      addToMatchedCards(card2);
+      // console.log(matchedCards);   // - test if card is added to this array
+      // reset openCards to be empty
       openCards = [];
     }
     else {
@@ -83,19 +95,24 @@ function checkOpenCardsForDuplicate() {
         card1.classList.remove('show');
         card2.classList.remove('open');
         card2.classList.remove('show');
+        // reset openCards to be empty
         openCards = [];
       }, 1050);
     }
   }
-  // else {
-  //   // cards are NOT equal
-  //   //stop adding cards / reset to black side
-  //   card.classList.toggle('open');
-  //   card.classList.toggle('show');
-  //   console.log("openCards");
-  // }
 }
 
+function allCardsUncovered() {
+  console.log("in matched cards there are: " + matchedCards.length + " cards");   // - test how many cards are added to the array
+  if (matchedCards.length === 16) {
+    // say that you won the Game
+    setTimeout(function winwin() {
+      window.alert("You won! The game is over. You only needed X moves to do it.");
+      // say how many moves were used to win
+    }, 0);
+
+  }
+}
 
 
 displayCardSymbol();

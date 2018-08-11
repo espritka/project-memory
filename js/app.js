@@ -42,6 +42,8 @@ const listOfcards = document.querySelectorAll('.card');
 // console.log(listOfcards);   - test if correct list is created
 let openCards = [];
 let matchedCards = [];
+let moves = document.querySelector('.moves');
+let movesCount = 0;
 
 function displayCardSymbol () {
   for (let i = 0; i < listOfcards.length; i++) {
@@ -70,12 +72,13 @@ function addToMatchedCards(card) {
 
 function checkOpenCardsForDuplicate() {
   if (openCards.length < 2) {
-    // wait for another card, do nothing
+    // wait for another card, count this move
     console.log(openCards)
   }
   else if (openCards.length === 2) {
     console.log("Two cards!")
     console.log(openCards)
+    howManyMoves();
     //check if card1 and card2 are equal
     let card1 = openCards[0];
     let card2 = openCards[1];
@@ -107,11 +110,18 @@ function allCardsUncovered() {
   if (matchedCards.length === 16) {
     // say that you won the Game
     setTimeout(function winwin() {
-      window.alert("You won! The game is over. You only needed X moves to do it.");
+      window.alert("You won! The game is over. You only needed " + movesCount + " moves to do it.");
       // say how many moves were used to win
     }, 0);
-
   }
+}
+
+// ************** moves count ***************
+
+function howManyMoves() {
+  movesCount = movesCount + 1;
+  moves.innerHTML = movesCount;
+  console.log(moves);
 }
 
 

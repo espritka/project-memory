@@ -44,9 +44,11 @@ let openCards = [];
 let matchedCards = [];
 let moves = document.querySelector('.moves');
 let movesCount = 0;
+let starsCount = 3;
 const starOne = document.getElementById('one');
 const starTwo = document.getElementById('two');
 const starThree = document.getElementById('three');
+const restart = document.querySelector('.restart');
 
 
 function displayCardSymbol () {
@@ -115,7 +117,7 @@ function allCardsUncovered() {
   if (matchedCards.length === 16) {
     // say that you won the Game
     setTimeout(function youWin() {
-      window.alert("You win! The game is over. You only needed " + movesCount + " moves to do it.");
+      window.alert("You win! The game is over. You only needed " + movesCount + " moves to do it. You get " + starsCount + " stars!");
       // say how many moves were used to win
     }, 0);
   }
@@ -134,20 +136,52 @@ function howManyMoves() {
 function stars() {
   if (movesCount <= 12) {
     // display 3 stars
+    starsCount = 3;
   } else if (movesCount > 12 && movesCount <= 20) {
     // display 2 stars
     starOne.style.display = 'none';
+    starsCount = 2;
   } else if (movesCount > 20 && movesCount <= 30) {
     // display 1 stars
     starOne.style.display = 'none';
     starTwo.style.display = 'none';
+    starsCount = 1;
   } else {
     // no stars
     starOne.style.display = 'none';
     starTwo.style.display = 'none';
     starThree.style.display = 'none';
+    starsCount = 0;
   }
 }
 
+// ************** restart button ***************
+
+function restartButton() {
+  restart.addEventListener('click', function() {
+    starsCount = 3;
+    starOne.style.display = '';
+    starTwo.style.display = '';
+    starThree.style.display = '';
+    movesCount = 0;
+    moves.innerHTML = movesCount;
+    // console.log("Restart button was clicked!")  // test if function is working
+    // restart board Game: shuffle cards
+
+  });
+}
+
+
+// ************** shuffle cards ***************
+
+
+
+
+
+
+
+
+
 
 displayCardSymbol();
+restartButton();

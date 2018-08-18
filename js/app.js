@@ -1,45 +1,13 @@
-/*
-* Create a list that holds all of your cards
-*/
-
-
-/*
-* Display the cards on the page
-*   - shuffle the list of cards using the provided "shuffle" method below
-*   - loop through each card and create its HTML
-*   - add each card's HTML to the page
-*/
-
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+//https://stackoverflow.com/questions/28083708/how-to-disable-clicking-inside-div
+// to-do: create timer, start timer with first click on card, restart timer with restart button
 
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
+// ************** variables ***************
 
-  return array;
-}
-
-
-/*
-* set up the event listener for a card. If a card is clicked:
-*  - display the card's symbol (put this functionality in another function that you call from this one)
-*  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-*  - if the list already has another card, check to see if the two cards match
-*    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-*    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-*/
-
-const deckOfCards = [];     // list that hold all the cards, next step is to shuffle it
+const deck = document.querySelector('.deck');
+const deckOfCards = document.querySelectorAll('.deck li');     // list that hold all the cards, next step is to shuffle it
 const listOfcards = document.querySelectorAll('.card');
-// console.log(listOfcards);   - test if correct list is created
+console.log(listOfcards);   //- test if correct list is created
 let openCards = [];
 let matchedCards = [];
 let moves = document.querySelector('.moves');
@@ -58,8 +26,12 @@ function displayCardSymbol () {
       const cardOpen = event.target.classList.toggle('open');
       const cardShow = event.target.classList.toggle('show');
       addToOpenCards(event.target);
+      if (event.target.classList.contains('open', 'show')) {
+        listOfcards[i].setAttribute('style', 'pointer-events: none;');
+      }
     })
   }
+
 }
 
 function addToOpenCards(card) {
@@ -87,6 +59,7 @@ function checkOpenCardsForDuplicate() {
     //check if card1 and card2 are equal
     let card1 = openCards[0];
     let card2 = openCards[1];
+
     if (card1.firstElementChild.className  === card2.firstElementChild.className) {
       console.log("cards are equal");
       // add to array matchedCards
@@ -95,6 +68,8 @@ function checkOpenCardsForDuplicate() {
       // console.log(matchedCards);   // - test if card is added to this array
       // reset openCards to be empty
       openCards = [];
+      card1.removeAttribute('style');
+      card2.removeAttribute('style');
     }
     else {
       console.log("cards are NOT equal");
@@ -103,9 +78,11 @@ function checkOpenCardsForDuplicate() {
         card1.classList.remove('show');
         card2.classList.remove('open');
         card2.classList.remove('show');
+        card1.removeAttribute('style');
+        card2.removeAttribute('style');
         // reset openCards to be empty
         openCards = [];
-      }, 1050);
+      }, 800);
     }
   }
   allCardsUncovered();
@@ -167,21 +144,50 @@ function restartButton() {
     moves.innerHTML = movesCount;
     // console.log("Restart button was clicked!")  // test if function is working
     // restart board Game: shuffle cards
-
+    shuffleCards();
   });
 }
 
 
 // ************** shuffle cards ***************
+// credit to https://gomakethings.com/converting-a-nodelist-to-an-array-with-vanilla-javascript/
 
+const deckArray = Array.from(deckOfCards);
 
+function shuffle(deckArray) {
+  let currentIndex = deckArray.length, temporaryValue, randomIndex;
 
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = deckArray[currentIndex];
+    deckArray[currentIndex] = deckArray[randomIndex];
+    deckArray[randomIndex] = temporaryValue;
+  }
+  return deckArray;
+}
 
+function shuffleCards(){
+  const newDeck = shuffle(deckArray);
+  // console.log(deckArray);   // test if cards are shuffled
+  for (let i = 0; i < newDeck.length; i++) {
+    newDeck[i].classList.remove("match", "show", "open");
+    newDeck[i].removeAttribute("style");
+    openCards = [];
+    matchedCards = [];
+    deck.appendChild(newDeck[i]);
+  }
+  /* ~~ different ways to do it ~~
+   for (let card of newDeck) {
+     deck.appendChild(card);
+   }
+   ~~ or ~~
+   newDeck.forEach(function myFunction(card) {
+     deck.appendChild(card);
+   });
+ */
+}
 
-
-
-
-
-
+shuffleCards();
 displayCardSymbol();
 restartButton();

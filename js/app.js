@@ -1,6 +1,7 @@
-// Shuffle function from http://stackoverflow.com/a/2450976
-//https://stackoverflow.com/questions/28083708/how-to-disable-clicking-inside-div
-// to-do: create timer, start timer with first click on card, restart timer with restart button
+// Shuffle function from : http://stackoverflow.com/a/2450976
+//prevent clicking again on the same element idea from : https://stackoverflow.com/questions/28083708/how-to-disable-clicking-inside-div
+//remove attribute idea: https://www.w3schools.com/jsref/met_element_removeattribute.asp
+// to-do: create timer, start timer with first click on card, restart timer with restart button, modal pop-up
 
 // ************** variables ***************
 
@@ -17,6 +18,7 @@ const starOne = document.getElementById('one');
 const starTwo = document.getElementById('two');
 const starThree = document.getElementById('three');
 const restart = document.querySelector('.restart');
+let interval;
 
 
 function displayCardSymbol () {
@@ -31,7 +33,7 @@ function displayCardSymbol () {
       }
     })
   }
-
+  interval = setInterval(startTimer, 1000);
 }
 
 function addToOpenCards(card) {
@@ -70,8 +72,7 @@ function checkOpenCardsForDuplicate() {
       openCards = [];
       card1.removeAttribute('style');
       card2.removeAttribute('style');
-    }
-    else {
+    } else {
       console.log("cards are NOT equal");
       setTimeout (function removeOpenShow() {
         card1.classList.remove('open');
@@ -94,9 +95,10 @@ function allCardsUncovered() {
   if (matchedCards.length === 16) {
     // say that you won the Game
     setTimeout(function youWin() {
-      window.alert("You win! The game is over. You only needed " + movesCount + " moves to do it. You get " + starsCount + " stars!");
+      window.alert("You win! You only needed " + movesCount + " moves to do it. You get " + starsCount + " stars! You did in in " + seconds.innerHTML + " seconds");
       // say how many moves were used to win
     }, 0);
+    stopTimer();
   }
 }
 
@@ -145,6 +147,7 @@ function restartButton() {
     // console.log("Restart button was clicked!")  // test if function is working
     // restart board Game: shuffle cards
     shuffleCards();
+    resetTimer();
   });
 }
 
@@ -188,6 +191,50 @@ function shuffleCards(){
  */
 }
 
+// ************** timer ***************
+// source: https://www.w3schools.com/howto/howto_js_countdown.asp
+// source: https://www.youtube.com/watch?v=jRhB1IG7uAw
+
+let minutes = document.getElementById("minutes");
+let seconds = document.getElementById("seconds");
+
+minutesCount = 0;
+secondsCount = 0;
+
+function startTimer() {
+  secondsCount++;
+  if (secondsCount < 10) {
+    seconds.innerHTML = "0" + secondsCount;
+  } else {
+    seconds.innerHTML = secondsCount;
+  }
+  console.log(secondsCount);
+}
+
+function resetTimer() {
+  clearInterval(interval);
+  seconds.innerHTML = "00";
+  minutes.innerHTML = "0";
+  secondsCount = 0;
+  interval = setInterval(startTimer, 1000);
+}
+
+function stopTimer() {
+  clearInterval(interval);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// ************** game init ***************
 shuffleCards();
 displayCardSymbol();
 restartButton();

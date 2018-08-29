@@ -1,7 +1,7 @@
 // Shuffle function from : http://stackoverflow.com/a/2450976
 //prevent clicking again on the same element idea from : https://stackoverflow.com/questions/28083708/how-to-disable-clicking-inside-div
 //remove attribute idea: https://www.w3schools.com/jsref/met_element_removeattribute.asp
-// to-do: create timer, start timer with first click on card, restart timer with restart button, modal pop-up
+// to-do: start timer with first click on card
 
 // ************** variables ***************
 
@@ -95,7 +95,8 @@ function allCardsUncovered() {
   if (matchedCards.length === 16) {
     // say that you won the Game
     setTimeout(function youWin() {
-      window.alert("You win! You only needed " + movesCount + " moves to do it. You get " + starsCount + " stars! You did in in " + seconds.innerHTML + " seconds");
+      displayModal();
+      // window.alert("You win! You only needed " + movesCount + " moves to do it. You get " + starsCount + " stars! You did in in " + seconds.innerHTML + " seconds");
       // say how many moves were used to win
     }, 0);
     stopTimer();
@@ -193,7 +194,8 @@ function shuffleCards(){
 
 // ************** timer ***************
 // source: https://www.w3schools.com/howto/howto_js_countdown.asp
-// source: https://www.youtube.com/watch?v=jRhB1IG7uAw
+// source: https://jsfiddle.net/Daniel_Hug/pvk6p/
+// source: https://www.youtube.com/watch?v=gpFPppFU8s8
 
 let minutes = document.getElementById("minutes");
 let seconds = document.getElementById("seconds");
@@ -203,12 +205,21 @@ secondsCount = 0;
 
 function startTimer() {
   secondsCount++;
+  if (secondsCount >= 60) {
+    secondsCount = 0;
+    minutesCount++;
+    if (minutesCount < 10) {
+      minutes.innerHTML = "0" + minutesCount
+    } else {
+      minutes.innerHTML = minutesCount;
+    }
+  }
   if (secondsCount < 10) {
     seconds.innerHTML = "0" + secondsCount;
   } else {
     seconds.innerHTML = secondsCount;
   }
-  console.log(secondsCount);
+  // console.log(secondsCount); - test if seconds are counting
 }
 
 function resetTimer() {
@@ -223,16 +234,20 @@ function stopTimer() {
   clearInterval(interval);
 }
 
+// ************** the MODAL ***************
 
+const modal = document.getElementById("myModal");
+const closeModal = document.getElementsByClassName("close")[0];
 
+closeModal.onclick = function() {
+  modal.style.display = "none";
+}
 
-
-
-
-
-
-
-
+function displayModal() {
+  modal.style.display = "block";
+  let message = document.getElementById("message");
+  message.innerHTML = "You win! <br>You did it in " + movesCount + " moves. <br>You get " + starsCount + " stars for this! <br>You did it in " + minutes.innerHTML + " minute(s) and " + seconds.innerHTML + " seconds! Wow!"
+}
 
 // ************** game init ***************
 shuffleCards();

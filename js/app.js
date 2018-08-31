@@ -246,7 +246,8 @@ closeModal.onclick = function() {
 function displayModal() {
   modal.style.display = "block";
   let message = document.getElementById("message");
-  message.innerHTML = "You win! <br>You did it in " + movesCount + " moves. <br>You get " + starsCount + " stars for this! <br>You did it in " + minutes.innerHTML + " minute(s) and " + seconds.innerHTML + " seconds! Wow!"
+  message.innerHTML = "You win! <br>You did it in " + movesCount + " moves. <br>You get " + starsCount + " stars for this! <br>You did it in "
+                      + minutes.innerHTML + " minute(s) and " + seconds.innerHTML + " seconds! " + "<br> Close modal and click restart button to play again.";
 }
 
 // ************** game init ***************

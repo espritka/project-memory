@@ -17,14 +17,15 @@
 
         <section class="score-panel">
         	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        		<li id="one"><i class="fa fa-star"></i></li>
+        		<li id="two"><i class="fa fa-star"></i></li>
+        		<li id="three"><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves">3</span> Moves
+        	<span class="moves">0</span> Moves
+          <span class="time">Time</span> <span id="timer"><span id="minutes">0</span>:<span id="seconds">00</span></span>
 
-            <div class="restart">
+          <div class="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
         </section>
@@ -36,7 +37,7 @@
             <li class="card">
                 <i class="fa fa-paper-plane-o"></i>
             </li>
-            <li class="card match">
+            <li class="card">
                 <i class="fa fa-anchor"></i>
             </li>
             <li class="card">
@@ -45,7 +46,7 @@
             <li class="card">
                 <i class="fa fa-cube"></i>
             </li>
-            <li class="card match">
+            <li class="card">
                 <i class="fa fa-anchor"></i>
             </li>
             <li class="card">
@@ -66,7 +67,7 @@
             <li class="card">
                 <i class="fa fa-bomb"></i>
             </li>
-            <li class="card open show">
+            <li class="card">
                 <i class="fa fa-bolt"></i>
             </li>
             <li class="card">
@@ -79,6 +80,14 @@
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
+    </div>
+
+    <!-- ************** modal box *************** -->
+    <div class="modal" id="myModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="message">Some text in the Modal...</p>
+      </div>
     </div>
 
     <script src="js/app.js"></script>

@@ -8,7 +8,7 @@
 const deck = document.querySelector('.deck');
 const deckOfCards = document.querySelectorAll('.deck li');     // list that hold all the cards, next step is to shuffle it
 const listOfcards = document.querySelectorAll('.card');
-console.log(listOfcards);   //- test if correct list is created
+// console.log(listOfcards);   //- test if correct list is created
 let openCards = [];
 let matchedCards = [];
 let moves = document.querySelector('.moves');
@@ -20,6 +20,7 @@ const starThree = document.getElementById('three');
 const restart = document.querySelector('.restart');
 let interval;
 
+// ************** Game logic  ***************
 
 function displayCardSymbol () {
   for (let i = 0; i < listOfcards.length; i++) {
@@ -83,7 +84,7 @@ function checkOpenCardsForDuplicate() {
         card2.removeAttribute('style');
         // reset openCards to be empty
         openCards = [];
-      }, 800);
+      }, 700);
     }
   }
   allCardsUncovered();
@@ -182,14 +183,14 @@ function shuffleCards(){
     deck.appendChild(newDeck[i]);
   }
   /* ~~ different ways to do it ~~
-   for (let card of newDeck) {
-     deck.appendChild(card);
-   }
-   ~~ or ~~
-   newDeck.forEach(function myFunction(card) {
-     deck.appendChild(card);
-   });
- */
+  for (let card of newDeck) {
+  deck.appendChild(card);
+}
+~~ or ~~
+newDeck.forEach(function myFunction(card) {
+deck.appendChild(card);
+});
+*/
 }
 
 // ************** timer ***************
@@ -247,7 +248,7 @@ function displayModal() {
   modal.style.display = "block";
   let message = document.getElementById("message");
   message.innerHTML = "You win! <br>You did it in " + movesCount + " moves. <br>You get " + starsCount + " stars for this! <br>You did it in "
-                      + minutes.innerHTML + " minute(s) and " + seconds.innerHTML + " seconds! " + "<br> Close modal and click restart button to play again.";
+  + minutes.innerHTML + " minute(s) and " + seconds.innerHTML + " seconds! " + "<br> Close modal and click restart button to play again.";
 }
 
 // ************** game init ***************
